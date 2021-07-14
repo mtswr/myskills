@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { View, Text, StyleSheet, TextInput, Platform, FlatList } from 'react-native';
 import { Button } from '../components/Button';
@@ -14,15 +14,37 @@ export function Home() {
     // coleção das habilidades
     const [mySkills, setMySkills] = useState([]);
 
+
+    const [greetings, setGreeting] = useState('');
+
     // handle é uma convenção de quando a função é disparada por uma interação do usuario 
     function handleAddNewSkill() {
         setMySkills(oldState => [...oldState, newSkill]);
     }
 
+    useEffect(() => {
+        const currenthour = new Date().getHours();
+
+        if (currenthour < 12) {
+            setGreeting('Good morning');
+        } else if (currenthour >= 12 && currenthour < 18) {
+            setGreeting('Good afternoon');
+        } else {
+            setGreeting('Good night');
+        }
+    })
 
     return (
         <View style={styles.container}>
+            
             <Text style={styles.title}>Welcome, Matheus</Text>
+
+
+            <Text style={styles.greetings}>
+                { greetings }
+            </Text>
+
+
             <TextInput
                 style={styles.input}
                 placeholder="New skill"
@@ -35,6 +57,7 @@ export function Home() {
             <Text style={[styles.title, { marginVertical: 50 }]}>
                 My Skill
             </Text>
+
             
             <FlatList
                 data={mySkills}
@@ -43,11 +66,6 @@ export function Home() {
                     <SkillCard skill={item} />
                 )}
             />
-            {/* {
-                mySkills.map(skill => (
-                    <SkillCard key={skill} skill={skill}/>
-                ))
-            } */}
 
         </View>
     );
@@ -74,4 +92,7 @@ const styles = StyleSheet.create({
         marginTop: 30,
         borderRadius: 7,
     },
+    greetings: {
+        color: '#fff'
+    }
 })
