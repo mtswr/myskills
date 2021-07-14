@@ -13,7 +13,7 @@ export function Home() {
 
     // coleção das habilidades
     const [mySkills, setMySkills] = useState([]);
-
+    
 
     const [greetings, setGreeting] = useState('');
 
