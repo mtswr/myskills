@@ -1,12 +1,17 @@
 import React from 'react';
-import { Home } from './src/pages/Home';
 import { StatusBar } from 'react-native';
 
+import { Home } from './src/pages/Home';
+
 export default function App() {
-  return (
-    <>
-      <StatusBar barStyle="light-content"/>
-      <Home />
-    </>
-  );
+    return (
+        <>
+            <StatusBar
+                animated={true}
+                backgroundColor="#121016"
+                barStyle="light-content"
+            />
+            <Home />
+        </>
+    );
 }
